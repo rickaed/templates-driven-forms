@@ -1,0 +1,53 @@
+<form #userForm="ngForm" (ngSubmit)="userForm.valid && onSubmit()">
+
+    Form submitted ? {{userForm.submitted}}
+    Form valid ? {{userForm.valid}}
+    Form invalid ? {{userForm.valid}}
+
+    <fieldset>
+        <legend>
+            <label for="firstname">Prénom</label>
+        </legend>
+        <input id="firstname" name="firstname" type="text" [(ngModel)]="model.firstname" #firstname="ngModel"
+            minlength="3" maxlength="15" required>
+        <div *ngIf="firstname.errors && userForm.submitted">
+            <span *ngIf="firstname.errors['required']">Le prénom est requis.</span>
+            <span *ngIf="firstname.errors['minlength']">Le prénom doit comporter au moins 3 caractères.</span>
+            <span *ngIf="firstname.errors['maxlength']">Le prénom ne doit pas dépasser 15 caractères.</span>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            <label for="lastname">Nom</label>
+        </legend>
+        <input id="lastname" name="lastname" type="text" [(ngModel)]="model.lastname" minlength="3" maxlength="15"
+            #lastname="ngModel" required>
+        <div *ngIf="lastname.errors && userForm.submitted">
+            <span *ngIf="lastname.errors['required']">Le nom est requis.</span>
+            <span *ngIf="lastname.errors['minlength']">Le nom doit comporter au moins 3 caractères.</span>
+            <span *ngIf="lastname.errors['maxlength']">Le nom ne doit pas dépasser 15 caractères.</span>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            <label for="email">E-mail</label>
+        </legend>
+        <input id="email" name="email" type="email" [(ngModel)]="model.email" #email="ngModel" required email>
+        <div *ngIf="email.errors && userForm.submitted">
+            <span *ngIf="email.errors['required']">Le mail est requis.</span>
+            <span *ngIf="email.errors['email']">L'email est invalide.</span>
+            
+        </div>
+    </fieldset>
+   
+    <fieldset>
+        <legend>
+            <label for="password">Mot de passe</label>
+        </legend>
+        <input id="password" name="password" type="password" [(ngModel)]="model.password">
+    </fieldset>
+
+    <button type="submit">Envoyer</button>
+</form>
