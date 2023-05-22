@@ -1,0 +1,59 @@
+<form (ngSubmit)="orderForm.valid && onSubmit()" [formGroup]="orderForm" #myForm="ngForm">
+
+    <div>
+        Form submitted ? {{myForm.submitted}}
+        Form valid ? {{orderForm.valid}}
+        Form invalid ? {{orderForm.invalid}}
+    </div>
+    <fieldset>
+        <legend>
+            <label for="id">Identifiant</label>
+        </legend>
+        <input id="id" name="id" type="text" formControlName="select">
+
+        <legend>
+            <label for="title">Titre</label>
+        </legend>
+        <input id="title" name="title" type="text" formControlName="select">
+
+        <div>
+
+        </div>
+    </fieldset>
+
+
+    <fieldset>
+        <div>
+            <label for="select_type">Type</label>
+            <select name="select_type" formControlName="select_type">
+                <option value="série" *ngFor="let type of types"></option>
+            </select>
+        </div>
+        
+        
+        
+        <div>
+            <label for="release date">Année de sortie</label>
+            <input name="release date" type="date" formControlName="date">
+        </div>
+        
+    </fieldset>
+
+
+    <div>
+        <div>
+            <label for="select_fiche">Fiche</label>
+            <select name="select_fiche" formControlName="select_fiche">
+                <option value="série" *ngFor="let type of types"></option>
+            </select>
+        </div>
+    </div>
+
+    <div *ngIf="orderForm.controls.contact.errors">
+        <span *ngIf="orderForm.controls.contact.errors?.['required']">Le champ contact est requis</span>
+        <span *ngIf="orderForm.controls.contact.errors?.['email']">L'adresse email doit être valide</span>
+    </div>
+    <button type="reset">Restaurer</button>
+    <button type="submit">Sauvegarder</button>
+
+</form>
